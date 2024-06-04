@@ -3,13 +3,15 @@ package jm.task.core.jdbc.dao;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
+    SessionFactory sessionFactory;
     public UserDaoHibernateImpl() {
-
+        sessionFactory = Util.getSessionFactory();
     }
 
 
@@ -27,7 +29,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
         {
             Transaction transaction = null;
-            try (Session session = Util.getSessionFactory().openSession()) {
+            try (Session session = sessionFactory.openSession()) {
                 // start a transaction
                 transaction = session.beginTransaction();
                 // save the user object
