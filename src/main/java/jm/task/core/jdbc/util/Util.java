@@ -5,14 +5,14 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Util {
+public final class Util {
     // реализуйте настройку соеденения с БД
     private final static String DRIVER = "com.mysql.jdbc.Driver";
     private final static String HOST = "jdbc:mysql://localhost/mydbtest";
     private final static String USER = "root";
     private final static String PASSWORD = "root";
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName(DRIVER);
@@ -23,15 +23,15 @@ public class Util {
         return connection;
 
     }
-//    public void closeConnection(Connection connection) {
-//        if (connection != null) {
-//            try {
-//                connection.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    public static void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }
